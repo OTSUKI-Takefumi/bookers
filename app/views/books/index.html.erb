@@ -1,0 +1,59 @@
+<h1>Books</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Body</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+<% @books.each do |book| %>
+  <tbody>
+    <tr></tr>
+
+      <td class="list">
+        <%= book.title %>
+      </td>
+
+      <td class="list">
+        <%= book.body %>
+      </td>
+
+      <td><%= link_to "Show", book_path(book.id) %></td>
+      <td><%= link_to "Edit", edit_book_path(book.id) %></td>
+      <td><%= link_to "Destroy", book_path(book.id), method: :delete %></td>
+    </tr>
+  </tbody>
+ <% end %>
+</table>
+
+  <h2>New book</h2>
+
+  <% if @book.errors.any? %>
+    <%= @book.errors.count %>error ※please fill in the blanks
+    <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= form_with model: @book do |f| %>
+
+    <div class="field">
+      <h3>Title</h3>
+      <%= f.text_field :title %>
+    </div>
+
+    <div class="field">
+      <h3>Body</h3>
+      <%= f.text_area :body %>
+    </div>
+
+    <div class="field">
+      <%= f.submit 'Create Book' %>
+    </div>
+
+  <% end %>
